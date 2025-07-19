@@ -4,6 +4,7 @@ import logging
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
+
 app = FastAPI(redirect_slashes=False)
 
 # Register routers
