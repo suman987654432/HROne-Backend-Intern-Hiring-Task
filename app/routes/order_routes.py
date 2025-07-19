@@ -8,16 +8,16 @@ import logging
 
 router = APIRouter(prefix="/orders", tags=["Orders"])
 
-# Create Order API
+
 @router.post("/", status_code=201)
 async def create_order(order: OrderCreate):
     try:
-        # Log the incoming order data for debugging
+      
         logging.info(f"Creating order: {order.dict()}")
         
-        # Validate that all product IDs exist
+        
         for item in order.items:
-            # Check if productId is valid ObjectId format (24 hex characters)
+           
             if not ObjectId.is_valid(item.productId):
                 raise HTTPException(
                     status_code=400, 
@@ -40,7 +40,7 @@ async def create_order(order: OrderCreate):
         logging.error(f"Failed to create order: {str(e)}")
         raise HTTPException(status_code=400, detail=f"Failed to create order: {str(e)}")
 
-# Add endpoint to get all orders (for debugging)
+# to get all orders 
 @router.get("/", status_code=200)
 async def get_all_orders(
     limit: int = Query(10),
@@ -71,7 +71,7 @@ async def get_orders(
     offset: int = Query(0)
 ):
     try:
-        # Validate pagination parameters
+      
         offset, limit = validate_pagination_params(offset, limit)
         
         orders_cursor = db.orders.find({"userId": user_id}).skip(offset).limit(limit)

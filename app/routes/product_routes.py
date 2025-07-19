@@ -7,8 +7,7 @@ from typing import List
 
 router = APIRouter(prefix="/products", tags=["Products"])
 
-# Create Product API
-# Create Product API
+
 @router.post("/", status_code=201)
 async def create_product(product: ProductCreate):
     try:
@@ -28,7 +27,7 @@ async def list_products(
     offset: int = Query(0)
 ):
     try:
-        # Validate pagination parameters
+       
         offset, limit = validate_pagination_params(offset, limit)
         
         query = {}
